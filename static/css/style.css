@@ -1,6 +1,6 @@
 /********** Template CSS **********/
 :root {
-    --primary: #00B98E;
+    --primary: #006400; /* Dark Green */
     --secondary: #FF6922;
     --light: #EFFDF5;
     --dark: #0E2E50;
@@ -371,6 +371,10 @@
 
 
 /*** Footer ***/
+.footer {
+    background-color: #006400; /* Dark Green */
+}
+
 .footer .btn.btn-social {
     margin-right: 5px;
     width: 35px;
