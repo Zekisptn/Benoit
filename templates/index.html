@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>House</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{{ url_for('static', filename='img/favicon.ico')}}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{{ url_for('static', filename='lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar Start -->
+        <div class="container-fluid nav-bar bg-transparent">
+            <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
+                <a href="{{ url_for('home') }}" class="navbar-brand d-flex align-items-center text-center">
+                    <div class="p-2 me-2">
+                        <img class="img-fluid" src="{{ url_for('static', filename='img/icon.png') }}" alt="Icon" style="width: 140px; height: 70px;">
+                    </div>
+                    <h1 class="m-0" style="color: darkgreen;">Green Paddy Hills</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a href="{{ url_for('home') }}" class="nav-item nav-link active">Home</a>
+                        <a href="{{ url_for('about', filename='about.html') }}" class="nav-item nav-link">About</a>
+                        <a href="{{url_for('contact', filename='contact.html') }}" class="nav-item nav-link">Contact</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Navbar End -->
+
+
+        <!-- Header Start -->
+        <div class="container-fluid header bg-white p-0">
+            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+                <div class="col-md-6 p-5 mt-lg-5">
+                    <h1 class="display-5 animated fadeIn mb-4">Temukan <span style="color: darkgreen;">Rumah Sempurna</span> Untuk Tinggal Bersama Keluarga Anda</h1>
+                </div>
+                <div class="col-md-6 animated fadeIn">
+                    <div class="owl-carousel header-carousel">
+                        <div class="owl-carousel-item">
+                            <img class="img-fluid" src="{{ url_for('static', filename='img/IMG_7644.jpg')}}" alt="">
+                        </div>
+                        <div class="owl-carousel-item">
+                            <img class="img-fluid" src="{{url_for('static', filename='img/IMG_7645.jpg')}}" alt="">
+                        </div>
+                        <div class="owl-carousel-item">
+                            <img class="img-fluid" src="{{url_for('static', filename='img/IMG_7646.jpg')}}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+        
+        <!-- Category Start -->
+        <div class="container-xxl py-5 text-center" style="background-color: #ccffcc; border-radius: 8px;">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h2 class="mb-3">Green Paddy Hills, Perumahan Mewah Ready Stock dengan DP Ringan di Tajur Bogor</h2>
+                    <p>Green Paddy Hills, merupakan perumahan mewah di Bogor yang dibangun pada lokasi yang aman,
+                        nyaman, dan asri. Anda bisa memiliki rumah premium ini dengan DP yang ringan serta dapat dicicil. Untuk
+                        memberikan kualitas hidup yang baik serta menjaga nilai investasi properti agar tetap tinggi, hunian
+                        eksklusif ini kami bangun di lokasi strategis yang menjadi pusat bisnis dan niaga Kota Bogor yaitu
+                        di wilayah Tajur yang dekat dengan akses pintu Tol Jagorawi dan Tol Bocimi.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Category Start -->
+
+        <div class="container-xxl py-5 text-center" style="background-color: #006400; border-radius: 8px; color: white;">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h2 class="mb-3" style="color: white;">Fasilitas Di Perumahan Green Paddy Hills</h2>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="cat-item d-block bg-light text-center rounded p-3">
+                            <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <i class="fas fa-child"></i>
+                                </div>
+                                <h6>Playground</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="cat-item d-block bg-light text-center rounded p-3">
+                            <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </div>
+                                <h6>Mall</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="cat-item d-block bg-light text-center rounded p-3">
+                            <div class="rounded p-4">
+                                <div class="icon mb-3">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <h6>Tempat Wisata</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                        <p>Fasilitas yang terdapat di perumahan Green Paddy Hills juga didesain sedemikian rupa sehingga aman
+                            dan nyaman untuk Anda tinggali bersama dengan keluarga, seperti Mushola, taman bermain anak, one gate system, CCTV dan security 24 jam.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Custom Section Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-start">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="position-relative overflow-hidden p-0">
+                            <img class="img-fluid w-100 small-img"
+                                src="{{url_for('static' ,filename='img/type.jpg')}}"
+                                alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                        <h2 class="text-green mb-3" style="color: #003366; font-weight: 400; font-size: 1.25rem;">
+                            Tipe Rumah Green Paddy Hills
+                        </h2>
+                        <!-- <div style="width: 56px; height: 4px; background-color: #9ad1b3; margin-bottom: 1rem;"></div> -->
+                        <p>
+                            Green Paddy Hills Terrace dibangun dengan konsep <strong>"A Taste of Japanese Perception"</strong>
+                            sehingga menjadikannya sebagai hunian mewah berkualitas tinggi. Dalam proses pengembangannya,
+                            kami juga selalu memperhatikan berbagai hal secara mendetail sehingga hunian dapat dibangun
+                            dengan sempurna. Dengan konsep ini, kami dapat menyuguhkan perumahan minimalis modern yang aman
+                            dan nyaman untuk ditinggali dalam jangka waktu yang panjang ataupun sebagai salah satu pilihan
+                            investasi properti.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-xxl py-5" style="background-color: #ccffcc; border-radius: 8px;">
+            <div class="container">
+                <div class="row g-5 align-items-start">
+                    <div class="row g-5 align-items-center" >
+                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s"> 
+                            <h2 class="text-green mb-3" style="color: #003366; margin-top:-70px; font-weight: 400; font-size: 1.25rem;">
+                                Jelajahi Properti Eksklusif Kami
+                            </h2>
+                            <p>
+                                Dive into the world of luxury with our exclusive properties. Watch the video to see the exquisite design and top-notch amenities that set our homes apart.
+                            </p>
+                            <img class="img-fluid w-100 small-img mt-3" src="{{ url_for('static', filename='img/Copy Of Site Plan.png') }}" style="width:100%; height: 300px; object-fit: cover;" alt="Type Property">
+                        </div>
+                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                            <div class="position-relative overflow-hidden p-0">
+                                <iframe width="100%" height="315" src="https://www.youtube.com/embed/KAems883BVc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="container-xxl py-5 bg-light">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end justify-content-center shadow-sm py-3 px-4 mb-4" style="background-color: #006400; border-bottom: 4px solid #006400;">
+                    <div class="col-lg-6">
+                        <div class="text-center mx-auto wow" data-wow-delay="0.1s">
+                            <h1 class="mb-0 text-white">UNIT SIAP HUNI</h1>
+                        </div>
+                    </div>
+                </div>                                
+                <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-4 justify-content-center">
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="property-item rounded overflow-hidden">
+                                    <div class="position-relative overflow-hidden">
+                                        <a href=""><img class="img-fluid" style="width: 100%; height: 500px; object-fit: cover;" src="{{ url_for('static', filename='img/B6.jpg') }}" alt=""></a>
+                                    </div>
+                                    <div class="p-4 pb-0 text-center d-flex justify-content-center align-items-center" style="height: 60px;">
+                                        <a class="d-block h5 mb-2" href="">UNIT B6</a>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2 d-flex justify-content-center align-items-center">
+                                            <i class="fa fa-ruler-combined text-primary me-2"></i><span>72 m<sup>2</sup> (6m x 12m)</span>
+                                        </small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>2 Bed</small>
+                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>1 Bath</small>
+                                    </div>
+                                    <div class="text-center py-3" style="background-color: #ccffcc;">
+                                        <a href="https://wa.me/6281298170513?text=Boleh%20bertanya%20untuk%20unit%20B6%3F
+                                        " class="btn" style="background-color: #006400; color: white; padding: 12px 24px; font-size: 1.1rem;">INFO PRICE LIST</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                                <div class="property-item rounded overflow-hidden">
+                                    <div class="position-relative overflow-hidden">
+                                        <a href=""><img class="img-fluid" style="width: 100%; height: 500px; object-fit: cover;" src="{{ url_for('static', filename='img/B7.jpg') }}" alt=""></a>
+                                    </div>
+                                    <div class="p-4 pb-0 text-center d-flex justify-content-center align-items-center" style="height: 60px;">
+                                        <a class="d-block h5 mb-2" href="">UNIT B7</a>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>71 m<sup>2</sup> (6m x 12m)</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>2 Bed</small>
+                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>1 Bath</small>
+                                    </div>
+                                    <div class="text-center py-3" style="background-color: #ccffcc;">
+                                        <a href="https://wa.me/6281298170513?text=Boleh%20bertanya%20untuk%20unit%20B7%3F
+                                        " class="btn" style="background-color: #006400; color: white; padding: 12px 24px; font-size: 1.1rem;">INFO PRICE LIST</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <!-- Property List End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="position-relative overflow-hidden p-0">
+                            <img class="img-fluid w-100" src="{{url_for('static', filename='img/promo.jpg')}}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s" style="font-size: 1.1rem;">
+                        <h2 class="mb-4">PROMO <br>Green Paddy Hills</h2>
+                        <div style="width: 100px; height: 4px; background-color: #9ad1b3; margin-bottom: 1rem;"></div>
+                        <p>Miliki hunian di Green Paddy Hills, rumah modern & minimalis dengan promo - promo yang menarik berikut ini:</p>
+                        <ul>
+                            <li>✅ Tanpa DP</li>
+                            <li>✅ Cicilan 3 JT</li>
+                            <li>✅ Free Semua Biaya-biaya</li>
+                            <li>✅ Booking Only 3 Juta</li>
+                            <li>✅ Free PPN</li>
+                        </ul>
+                        <p>Special GIFT & PROMO</p>
+                        <ul>
+                            <li> Discount 30 JT</li>
+                            <li> Subsidi Bunga 1 Thn (3,99%)</li>
+                        </ul>
+                        <p>Ayo segera pilih hunian idaman kamu bersama Green Paddy Hills dan dapatkan Potongan Harga hingga 200jutaan!</p>
+                        <p>*Periode & Unit Terbatas</p>
+                        <p>*Syarat & Ketentuan Berlaku</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+        <!-- Call to Action Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="bg-light rounded p-3">
+                    <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                        <div class="row g-5 align-items-center">
+                            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                                <img class="img-fluid rounded w-100" src="{{url_for('static', filename='img/call-to-action.jpg')}}" alt="">
+                            </div>
+                            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                                <div class="mb-4">
+                                    <h1 class="mb-3">Contact With Our Certified Agent</h1>
+                                    <p>Eirmod sed ipsum dolor sit rebum magna erat. Tempor lorem kasd vero ipsum sit sit diam justo sed vero dolor duo.</p>
+                                </div>
+                                <a href="" class="btn py-3 px-4 me-2" style="background-color: #006400; color: white;"><i class="fa fa-phone-alt me-2"></i>Make A Call</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Call to Action End -->
+
+
+        <!-- Team Start -->
+        <!-- <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">Property Agents</h1>
+                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="team-item rounded overflow-hidden">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="{{url_for('static', filename='img/team-1.jpg')}}" alt="">
+                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-center p-4 mt-3">
+                                <h5 class="fw-bold mb-0">Full Name</h5>
+                                <small>Designation</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="team-item rounded overflow-hidden">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="{{url_for('static', filename='img/team-2.jpg')}}" alt="">
+                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-center p-4 mt-3">
+                                <h5 class="fw-bold mb-0">Full Name</h5>
+                                <small>Designation</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="team-item rounded overflow-hidden">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="{{url_for('static', filename='img/team-3.jpg')}}" alt="">
+                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-center p-4 mt-3">
+                                <h5 class="fw-bold mb-0">Full Name</h5>
+                                <small>Designation</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="team-item rounded overflow-hidden">
+                            <div class="position-relative">
+                                <img class="img-fluid" src="{{url_for('static', filename='img/team-4.jpg')}}" alt="">
+                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-center p-4 mt-3">
+                                <h5 class="fw-bold mb-0">Full Name</h5>
+                                <small>Designation</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- Team End -->
+
+
+        <!-- Testimonial Start -->
+        <div class="container-xxl py-5" style="background-color: #ccffcc; border-radius: 8px;">
+            <div class="container">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <h1 class="mb-3">Our Customer Say!</h1>
+                    <!-- <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p> -->
+                </div>
+                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="testimonial-item bg-light rounded p-3">
+                        <div class="bg-white border rounded p-4">
+                            <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+                            <div class="d-flex align-items-center">
+                                <!-- <img class="img-fluid flex-shrink-0 rounded" src="{{url_for('static', filename='img/testimonial-1.jpg')}}" style="width: 45px; height: 45px;"> -->
+                                <div class="ps-3 text-center">
+                                    <h6 class="fw-bold mb-1" style="margin-left: 180px;" >Customer</h6>
+                                    <small style="margin-left: 180px;" >Profession</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item bg-light rounded p-3">
+                        <div class="bg-white border rounded p-4">
+                            <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+                            <div class="d-flex align-items-center">
+                                <!-- <img class="img-fluid flex-shrink-0 rounded" src="{{url_for('static', filename='img/testimonial-2.jpg')}}" style="width: 45px; height: 45px;"> -->
+                                <div class="ps-3">
+                                    <h6 class="fw-bold mb-1" style="margin-left: 180px;" >Customer</h6>
+                                    <small style="margin-left: 185px;" >Profession</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item bg-light rounded p-3">
+                        <div class="bg-white border rounded p-4">
+                            <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+                            <div class="d-flex align-items-center">
+                                <!-- <img class="img-fluid flex-shrink-0 rounded" src="{{url_for('static', filename='img/testimonial-3.jpg')}}" style="width: 45px; height: 45px;"> -->
+                                <div class="ps-3">
+                                    <h6 class="fw-bold mb-1" style="margin-left: 180px;" >Customer</h6>
+                                    <small style="margin-left: 185px;" >Profession</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial End -->
+        
+
+        <!-- Footer Start -->
+        <div class="container-fluid text-white-50 footer pt-3 mt-3 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-3">
+                <div class="row g-3">
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-3">Get In Touch</h5>
+                        <p class="mb-1"><i class="fa fa-map-marker-alt me-2"></i>Jl. Sukawarna no 2, Cipaku Kota Bogor</p>
+                        <p class="mb-1"><i class="fa fa-phone-alt me-2"></i>081298170513</p>
+                        <p class="mb-1"><i class="fa fa-envelope me-2"></i>greenpaddyhillsofficial@gmail.com</p>
+                        <div class="d-flex pt-1">
+                            <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/greenpaddyhills"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://www.tiktok.com/@greenpaddyhills"><i class="fab fa-tiktok"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="https://wa.me/081298170513"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-3">Quick Links</h5>
+                        <a class="btn btn-link text-white-50" href="">About Us</a>
+                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                        <a class="btn btn-link text-white-50" href="">Our Services</a>
+                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="text-white mb-3">Photo Gallery</h5>
+                        <div class="row g-1 pt-1">
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/IMG_7644.jpg')}}" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/IMG_7453.jpg')}}" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/IMG_7645.jpg')}}" alt="">
+                            </div>
+                            <div class="col-4">
+                                <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/IMG_7646.jpg')}}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">Green Paddy Hills</a>, 2025.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{url_for('static', filename='lib/wow/wow.min.js')}}"></script>
+    <script src="{{url_for('static', filename='lib/easing/easing.min.js')}}"></script>
+    <script src="{{url_for('static', filename='lib/waypoints/waypoints.min.js')}}"></script>
+    <script src="{{url_for('static', filename='lib/owlcarousel/owl.carousel.min.js')}}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
