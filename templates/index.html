@@ -155,7 +155,8 @@
                 <div class="row g-5 align-items-start">
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                         <div class="position-relative overflow-hidden p-0">
-                            <img class="img-fluid w-100 small-img"
+                            <img class="img-fluid small-img d-block ms-auto me-auto"
+                                style="max-width: 100%;"
                                 src="{{url_for('static' ,filename='img/type.jpg')}}"
                                 alt="">
                         </div>
@@ -181,15 +182,12 @@
         <div class="container-xxl py-5" style="background-color: #ccffcc; border-radius: 8px;">
             <div class="container">
                 <div class="row g-5 align-items-start">
+                    <h2 class="text-green mb-3 text-center" style="color: #003366; margin-top: 30px; font-weight: 400; font-size: 1.55rem;">
+                        GREEN PADDY HILLS CONCEPT
+                    </h2>
                     <div class="row g-5 align-items-center" >
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s"> 
-                            <h2 class="text-green mb-3" style="color: #003366; margin-top:-70px; font-weight: 400; font-size: 1.25rem;">
-                                Jelajahi Properti Eksklusif Kami
-                            </h2>
-                            <p>
-                                Dive into the world of luxury with our exclusive properties. Watch the video to see the exquisite design and top-notch amenities that set our homes apart.
-                            </p>
-                            <img class="img-fluid w-100 small-img mt-3" src="{{ url_for('static', filename='img/Copy Of Site Plan.png') }}" style="width:100%; height: 300px; object-fit: cover;" alt="Type Property">
+                            <img class="img-fluid w-100 small-img mt-3 img" src="{{ url_for('static', filename='img/Copy Of Site Plan.png') }}" style="width:100%; height: 300px; object-fit: cover;" alt="Type Property">
                         </div>
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                             <div class="position-relative overflow-hidden p-0">
@@ -476,9 +474,6 @@
                         <div class="row g-1 pt-1">
                             <div class="col-4">
                                 <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/IMG_7644.jpg')}}" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/IMG_7453.jpg')}}" alt="">
                             </div>
                             <div class="col-4">
                                 <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/IMG_7645.jpg')}}" alt="">
