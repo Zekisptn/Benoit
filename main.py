@@ -63,21 +63,70 @@ def kirim_pesan():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     msg = ''
-    registration_success = session.pop('registration_success', None)  # ambil pesan sukses register (sekali saja)
+    registration_success = session.pop('registration_success', None)
+    attempts = session.get('attempts', 0)  # ambil attempts dari session (default 0)
+
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         cursor.execute('SELECT * FROM login WHERE username = %s AND password = %s', (username, password,))
         account = cursor.fetchone()
+
         if account:
             session['loggedin'] = True
             session['id'] = account['id_user']
             session['username'] = account['username']
+            session.pop('attempts', None)  # reset attempts setelah berhasil login
             return redirect(url_for('dashboard'))
         else:
-            msg = 'Incorrect username/password!'
+            attempts += 1
+            session['attempts'] = attempts
+            if attempts >= 5:
+                session.pop('attempts', None)  # reset attempts supaya tidak stuck
+                session['reset_email_username'] = request.form['username']  # simpan username yg mau reset
+                return redirect(url_for('reset_password_email'))
+            msg = f'Incorrect username/password! Attempts: {attempts}/5'
+
     return render_template('login.html', msg=msg, registration_success=registration_success)
+
+
+@app.route('/reset-password', methods=['GET', 'POST'])
+def reset_password_email():
+    msg = ''
+    if request.method == 'POST' and 'email' in request.form:
+        email = request.form['email']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM login WHERE email = %s', (email,))
+        account = cursor.fetchone()
+
+        if account:
+            session['reset_user_id'] = account['id_user']
+            return redirect(url_for('set_new_password'))
+        else:
+            msg = 'Email tidak ditemukan!'
+
+    return render_template('reset_pass.html', msg=msg)
+
+@app.route('/set-new-password', methods=['GET', 'POST'])
+def set_new_password():
+    msg = ''
+    if 'reset_user_id' not in session:
+        return redirect(url_for('login'))  # kalau belum reset, langsung login
+
+    if request.method == 'POST' and 'password' in request.form:
+        password = request.form['password']
+        user_id = session['reset_user_id']
+
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('UPDATE login SET password = %s WHERE id_user = %s', (password, user_id,))
+        mysql.connection.commit()
+        session.pop('reset_user_id', None)
+        msg = 'Password berhasil diubah. Silakan login kembali.'
+        return redirect(url_for('login'))
+
+    return render_template('new_pass.html', msg=msg)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
