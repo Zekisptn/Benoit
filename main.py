@@ -42,7 +42,11 @@ app.jinja_env.filters['b64encode'] = b64encode_filter
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    # Fetch properties with status 'masih tersedia'
+    cursor.execute('SELECT * FROM properti WHERE status_properti = %s', ('masih tersedia',))
+    available_properties = cursor.fetchall()
+    return render_template('index.html', properties=available_properties)
 
 @app.route('/about')
 def about():
@@ -224,16 +228,17 @@ def add_property():
         # Flash message to notify success
         flash('Property berhasil ditambahkan!', 'success')
 
-        return redirect(url_for('dashboard'))
+        # return redirect(url_for('dashboard'))
 
     return render_template('add_property.html')
 
 
-@app.route('/edit-property/<int:id>', methods=['GET', 'POST'])
+app.route('/edit-property/<int:id>', methods=['GET', 'POST'])
 def edit_property(id):
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM properti WHERE id_properti = %s', (id,))
     property = cursor.fetchone()
+    
     if request.method == 'POST':
         nama_properti = request.form['nama_properti']
         gambar_rumah = request.files['gambar_rumah'].read() if 'gambar_rumah' in request.files else property['gambar_rumah']
@@ -241,9 +246,14 @@ def edit_property(id):
         kamar_mandi = request.form['kamar_mandi']
         kasur = request.form['kasur']
         status_properti = request.form['status_properti']
-        cursor.execute('UPDATE properti SET nama_properti = %s, gambar_rumah = %s, luas_rumah = %s, kamar_mandi = %s, kasur = %s, status_properti = %s WHERE id_properti = %s', (nama_properti, gambar_rumah, luas_rumah, kamar_mandi, kasur, status_properti, id))
+
+        cursor.execute('UPDATE properti SET nama_properti = %s, gambar_rumah = %s, luas_rumah = %s, kamar_mandi = %s, kasur = %s, status_properti = %s WHERE id_properti = %s', 
+                    (nama_properti, gambar_rumah, luas_rumah, kamar_mandi, kasur, status_properti, id))
         mysql.connection.commit()
+        
+        flash('Property berhasil diperbarui!', 'success')
         return redirect(url_for('list_properties'))
+
     return render_template('edit_property.html', property=property)
 
 @app.route('/delete-property/<int:id>', methods=['POST'])
@@ -252,6 +262,11 @@ def delete_property(id):
     cursor.execute('DELETE FROM properti WHERE id_properti = %s', (id,))
     mysql.connection.commit()
     return redirect(url_for('list_properties'))
+
+@app.route('/logout')
+def logout():
+    session.clear()  # atau session.pop('loggedin', None) kalau mau spesifik
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)

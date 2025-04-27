@@ -40,10 +40,8 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <a href="{{ url_for('dashboard') }}">Dashboard</a>
-        <a href="#">Users</a>
-        <a href="#">Settings</a>
         <a href="#" onclick="confirmLogout()">Logout</a>
-        <a href="{{ url_for('add_property') }}" id="manage-properties-link">Manage Properties</a>
+        <a href="{{ url_for('list_properties') }}" id="manage-properties-link">Manage Properties</a>
     </div>
 
     <!-- Main Content -->
