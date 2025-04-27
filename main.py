@@ -1,6 +1,6 @@
 import smtplib
 import os
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from email.mime.text import MIMEText
 from email.utils import formataddr
 from email.header import Header
@@ -8,6 +8,10 @@ from dotenv import load_dotenv
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
+import base64
+import sqlite3
+import mysql.connector
+
 
 load_dotenv()
 
@@ -27,6 +31,14 @@ EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 EMAIL_PENERIMA = os.getenv("EMAIL_PENERIMA")
 SMTP_SERVER = os.getenv("SMTP_SERVER")
 SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
+
+# Custom filter to encode image data to base64
+@app.template_filter('b64encode')
+def b64encode_filter(data):
+    return base64.b64encode(data).decode('utf-8')
+
+# Register the filter
+app.jinja_env.filters['b64encode'] = b64encode_filter
 
 @app.route('/')
 def home():
@@ -159,12 +171,87 @@ def register():
 @app.route('/dashboard')
 def dashboard():
     if 'loggedin' in session:
-        return render_template('dashboard.html', username=session['username'])
+        # Use flask_mysqldb's connection
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+
+        # Count properties grouped by status_properti
+        cursor.execute('SELECT status_properti, COUNT(*) as property_count FROM properti GROUP BY status_properti')
+        properties = cursor.fetchall()
+
+        # Initialize property_data with default values
+        property_data = {
+            'labels': [],
+            'values': []
+        }
+
+        # Populate property_data with the results
+        if properties:
+            property_data['labels'] = [prop['status_properti'] for prop in properties]
+            property_data['values'] = [prop['property_count'] for prop in properties]
+
+        return render_template('dashboard.html', username=session['username'], property_data=property_data)
     return redirect(url_for('login'))
+
 
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
+
+@app.route('/properties')
+def list_properties():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM properti')
+    properties = cursor.fetchall()
+    return render_template('properties.html', properties=properties)
+
+@app.route('/add-property', methods=['GET', 'POST'])
+def add_property():
+    if request.method == 'POST':
+        # Handle form data
+        nama_properti = request.form['nama_properti']
+        gambar_rumah = request.files['gambar_rumah'].read()
+        luas_rumah = request.form['luas_rumah']
+        kamar_mandi = request.form['kamar_mandi']
+        kasur = request.form['kasur']
+        status_properti = request.form['status_properti']
+        
+        # Insert data into the database
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('INSERT INTO properti (nama_properti, gambar_rumah, luas_rumah, kamar_mandi, kasur, status_properti) VALUES (%s, %s, %s, %s, %s, %s)', 
+                    (nama_properti, gambar_rumah, luas_rumah, kamar_mandi, kasur, status_properti))
+        mysql.connection.commit()
+
+        # Flash message to notify success
+        flash('Property berhasil ditambahkan!', 'success')
+
+        return redirect(url_for('dashboard'))
+
+    return render_template('add_property.html')
+
+
+@app.route('/edit-property/<int:id>', methods=['GET', 'POST'])
+def edit_property(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM properti WHERE id_properti = %s', (id,))
+    property = cursor.fetchone()
+    if request.method == 'POST':
+        nama_properti = request.form['nama_properti']
+        gambar_rumah = request.files['gambar_rumah'].read() if 'gambar_rumah' in request.files else property['gambar_rumah']
+        luas_rumah = request.form['luas_rumah']
+        kamar_mandi = request.form['kamar_mandi']
+        kasur = request.form['kasur']
+        status_properti = request.form['status_properti']
+        cursor.execute('UPDATE properti SET nama_properti = %s, gambar_rumah = %s, luas_rumah = %s, kamar_mandi = %s, kasur = %s, status_properti = %s WHERE id_properti = %s', (nama_properti, gambar_rumah, luas_rumah, kamar_mandi, kasur, status_properti, id))
+        mysql.connection.commit()
+        return redirect(url_for('list_properties'))
+    return render_template('edit_property.html', property=property)
+
+@app.route('/delete-property/<int:id>', methods=['POST'])
+def delete_property(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('DELETE FROM properti WHERE id_properti = %s', (id,))
+    mysql.connection.commit()
+    return redirect(url_for('list_properties'))
 
 if __name__ == '__main__':
     app.run(debug=True)
