@@ -177,19 +177,13 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email Anda" required>
-                                            <label for="email">Nomor Anda</label>
+                                            <input type="number" class="form-control" id="number" name="number" placeholder="Nomor Anda" required>
+                                            <label for="number">Nomor Anda</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject" name="subject" placeholder="Subjek" required>
-                                            <label for="subject">Subjek</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Tulis pesan Anda di sini" id="message" name="message" style="height: 150px" required></textarea>
+                                            <textarea class="form-control" placeholder="Tulis pesan Anda di sini" id="message" name="message" style="height: 190px" required></textarea>
                                             <label for="message">Pesan</label>
                                         </div>
                                     </div>
@@ -208,36 +202,26 @@
 
 
         <!-- Footer Start -->
-        <div class="container-fluid text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
-            <div class="container py-5">
-                <div class="row g-5">
+        <!-- Footer Start -->
+        <div class="container-fluid text-white-50 footer pt-3 mt-3 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-3">
+                <div class="row g-3">
                     <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Get In Touch</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Jl. Sukawarna no 2, Cipaku Kota Bogor</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>081298170513</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>greenpaddyhillsofficial@gmail.com</p>
-                        <div class="d-flex pt-2">
+                        <h5 class="text-white mb-3">Get In Touch</h5>
+                        <p class="mb-1"><i class="fa fa-map-marker-alt me-2"></i>Jl. Sukawarna no 2, Cipaku Kota Bogor</p>
+                        <p class="mb-1"><i class="fa fa-phone-alt me-2"></i>081298170513</p>
+                        <p class="mb-1"><i class="fa fa-envelope me-2"></i>greenpaddyhillsofficial@gmail.com</p>
+                        <div class="d-flex pt-1">
                             <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/greenpaddyhills"><i class="fab fa-instagram"></i></a>
                             <a class="btn btn-outline-light btn-social" href="https://www.tiktok.com/@greenpaddyhills"><i class="fab fa-tiktok"></i></a>
                             <a class="btn btn-outline-light btn-social" href="https://wa.me/081298170513"><i class="fab fa-whatsapp"></i></a>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Quick Links</h5>
-                        <a class="btn btn-link text-white-50" href="">About Us</a>
-                        <a class="btn btn-link text-white-50" href="">Contact Us</a>
-                        <a class="btn btn-link text-white-50" href="">Our Services</a>
-                        <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
-                        <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h5 class="text-white mb-4">Photo Gallery</h5>
-                        <div class="row g-2 pt-2">
+                        <h5 class="text-white mb-3">Photo Gallery</h5>
+                        <div class="row g-1 pt-1">
                             <div class="col-4">
                                 <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/IMG_7644.jpg')}}" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/IMG_7453.jpg')}}" alt="">
                             </div>
                             <div class="col-4">
                                 <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/IMG_7645.jpg')}}" alt="">
@@ -245,21 +229,26 @@
                             <div class="col-4">
                                 <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/IMG_7646.jpg')}}" alt="">
                             </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/property-5.jpg')}}" alt="">
-                            </div>
-                            <div class="col-4">
-                                <img class="img-fluid rounded bg-light p-1" src="{{url_for('static', filename='img/property-6.jpg')}}" alt="">
-                            </div>
                         </div>
+                    </div>
+                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <iframe class="position-relative rounded w-100 h-100"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.1051158933096!2d106.81370887475427!3d-6.633865693360545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69cfe668fb8481%3A0x33288b202cfd59b8!2sCluster%20Green%20Paddy%20Hills!5e0!3m2!1sen!2sid!4v1745504355483!5m2!1sen!2sid"
+                            frameborder="0" style="min-height: 150px; border:0;" allowfullscreen="" aria-hidden="false"
+                            tabindex="0"></iframe>
                     </div>
                 </div>
             </div>
             <div class="container">
                 <div class="copyright">
                     <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
                             &copy; <a class="border-bottom" href="#">Green Paddy Hills</a>, 2025.
+                        </div>
+                        <div class="col-md-6 text-center text-md-end mb-2 mb-md-0">
+                            <a href="{{url_for('login')}}" class="admin-icon">
+                                <i class="fas fa-user-shield"></i>
+                            </a>
                         </div>
                     </div>
                 </div>

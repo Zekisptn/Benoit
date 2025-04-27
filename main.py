@@ -233,7 +233,7 @@ def add_property():
     return render_template('add_property.html')
 
 
-app.route('/edit-property/<int:id>', methods=['GET', 'POST'])
+@app.route('/edit-property/<int:id>', methods=['GET', 'POST'])
 def edit_property(id):
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     cursor.execute('SELECT * FROM properti WHERE id_properti = %s', (id,))

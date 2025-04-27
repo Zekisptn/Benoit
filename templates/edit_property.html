@@ -98,19 +98,19 @@
                 window.location.href = "{{ url_for('logout') }}";
             }
         }
-    
-        document.addEventListener('DOMContentLoaded', function() {
-            {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
+    </script>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
                 {% for category, message in messages %}
-                    alert("{{ message | escape }}"); // Ensure message is escaped correctly
+                    alert({{ message|tojson }}); // Use tojson for JavaScript context
                     window.location.href = "{{ url_for('list_properties') }}";
                 {% endfor %}
-            {% endif %}
-            {% endwith %}
-        });
-    </script>
-    
-    
+            });
+        </script>
+    {% endif %}
+    {% endwith %}
 </body>
 </html>
