@@ -55,26 +55,15 @@ def about():
 @app.route('/kirim', methods=['POST'])
 def kirim_pesan():
     nama = request.form['name']
-    email_user = request.form['email']
-    subjek = request.form['subject']
+    nomor = request.form['number']
     pesan = request.form['message']
 
-    isi_email = f"Nama: {nama}\nEmail: {email_user}\nSubjek: {subjek}\n\nPesan:\n{pesan}"
-    msg = MIMEText(isi_email, _charset='utf-8')
-    msg['Subject'] = Header(f"Pesan dari {nama} - {subjek}", 'utf-8')
-    msg['From'] = formataddr((str(Header(nama, 'utf-8')), EMAIL_PENGIRIM))
-    msg['To'] = EMAIL_PENERIMA
-    msg['Reply-To'] = email_user
+    # Save the form data to the database
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('INSERT INTO formulir (nama_pengirim, nomor_pengirim, isi_pesan) VALUES (%s, %s, %s)', (nama, nomor, pesan))
+    mysql.connection.commit()
 
-    try:
-        server = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
-        server.starttls()
-        server.login(EMAIL_PENGIRIM, EMAIL_PASSWORD)
-        server.sendmail(EMAIL_PENGIRIM, EMAIL_PENERIMA, msg.as_string())
-        server.quit()
-        return "<h3>Pesan berhasil dikirim. Terima kasih!</h3>"
-    except Exception as e:
-        return f"<h3>Gagal mengirim email: {e}</h3>"
+    return {'status': 'success', 'message': 'Pesan berhasil disimpan. Terima kasih!'}
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -267,6 +256,13 @@ def delete_property(id):
 def logout():
     session.clear()  # atau session.pop('loggedin', None) kalau mau spesifik
     return redirect(url_for('login'))
+
+@app.route('/form-logs')
+def form_logs():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM formulir ORDER BY date DESC')
+    form_entries = cursor.fetchall()
+    return render_template('form_logs.html', form_entries=form_entries)
 
 if __name__ == '__main__':
     app.run(debug=True)
