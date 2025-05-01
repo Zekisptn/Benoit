@@ -36,6 +36,7 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 
 <body>
@@ -99,7 +100,7 @@
         <!-- Category Start -->
         <div class="container-xxl py-5 text-center" style="background-color: #ccffcc; border-radius: 8px;">
             <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 1000px;">
                     <h2 class="mb-3">Green Paddy Hills – Rumah Modern Minimalis Dengan Lokasi Strategis Dengan Harga Termurah Di Cipaku, Kota Bogor</h2>
                     <p>Green Paddy Hills, merupakan perumahan mewah di Bogor yang dibangun pada lokasi yang aman,
                         nyaman, dan asri. Anda bisa memiliki rumah premium ini dengan DP yang ringan serta dapat dicicil. Untuk
@@ -257,12 +258,20 @@
                         Green Paddy Hills Concept
                     </h2>
                     <div class="row g-5 align-items-center" >
-                        <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s"> 
-                            <img class="img-fluid w-100 small-img mt-3 img" src="{{ url_for('static', filename='img/Copy Of Site Plan.png') }}" style="width:100%; height: 300px; object-fit: cover;" alt="Type Property">
+                        <div class="col-md-6 animated fadeIn" data-wow-delay="0.5s"> 
+                            <div class="owl-carousel header-carousel">
+                                <div class="owl-carousel-item">
+                                    <img class="img-fluid w-100 small-img mt-3 img" src="{{ url_for('static', filename='img/Copy Of Site Plan.png') }}" style="width:100%; height: 400px; object-fit: cover;" alt="Type Property">
+                                </div>
+                                <div class="owl-carousel-item">
+                                    <img class="img-fluid w-100 small-img mt-3 img" src="{{ url_for('static', filename='img/type.jpg') }}" style="width:100%; height: 400px; object-fit: cover;" alt="Type Property">
+                                </div>
+                            </div>
+                            <!-- <img class="img-fluid w-100 small-img mt-3 img" src="{{ url_for('static', filename='img/Copy Of Site Plan.png') }}" style="width:100%; height: 300px; object-fit: cover;" alt="Type Property"> -->
                         </div>
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                             <div class="position-relative overflow-hidden p-0">
-                                <iframe width="100%" height="315" src="https://www.youtube.com/embed/KAems883BVc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="100%" height="295" src="https://www.youtube.com/embed/KAems883BVc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -285,7 +294,7 @@
                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
-                                        <a href=""><img class="img-fluid" style="width: 100%; height: 500px; object-fit: cover;" src="data:image/jpeg;base64,{{ property.gambar_rumah|b64encode }}" alt=""></a>
+                                        <a href=""><img class="img-fluid" style="width: 100%; height: 300px; object-fit: cover;" src="data:image/jpeg;base64,{{ property.gambar_rumah|b64encode }}" alt=""></a>
                                     </div>
                                     <div class="p-4 pb-0 text-center d-flex justify-content-center align-items-center" style="height: 60px;">
                                         <a class="d-block h5 mb-2" href="">{{ property.nama_properti }}</a>
@@ -369,84 +378,6 @@
         <!-- Call to Action End -->
 
 
-        <!-- Team Start -->
-        <!-- <div class="container-xxl py-5">
-            <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                    <h1 class="mb-3">Property Agents</h1>
-                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="{{url_for('static', filename='img/team-1.jpg')}}" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="{{url_for('static', filename='img/team-2.jpg')}}" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="{{url_for('static', filename='img/team-3.jpg')}}" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="team-item rounded overflow-hidden">
-                            <div class="position-relative">
-                                <img class="img-fluid" src="{{url_for('static', filename='img/team-4.jpg')}}" alt="">
-                                <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                            <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-        <!-- Team End -->
-
-
         <!-- Testimonial Start -->
         <div class="container-xxl py-5" style="background-color: #ccffcc; border-radius: 8px;">
             <div class="container">
@@ -460,9 +391,9 @@
                             <p>Proses pembelian rumahnya sangat cepat dan mudah. Pengajuan KPR nya juga cepat sehingga saya sekarang sudah bisa menempati rumahnya sekarang</p>
                             <div class="d-flex align-items-center">
                                 <!-- <img class="img-fluid flex-shrink-0 rounded" src="{{url_for('static', filename='img/testimonial-1.jpg')}}" style="width: 45px; height: 45px;"> -->
-                                <div class="ps-3 text-center">
-                                    <h6 class="fw-bold mb-1" style="margin-left: 180px;" >Customer</h6>
-                                    <small style="margin-left: 180px;" >Herlina</small>
+                                <div class="ps-3 customer-info">
+                                    <h6 class="fw-bold mb-1">Customer</h6>
+                                    <small>Herlina</small>
                                 </div>
                             </div>
                         </div>
@@ -472,9 +403,9 @@
                             <p>Lokasinya strategis dekat dengan pusat kota dan akses tol. Proses administrasinya juga cepat dan transparan, jadi saya merasa sangat aman membeli rumah ini</p>
                             <div class="d-flex align-items-center">
                                 <!-- <img class="img-fluid flex-shrink-0 rounded" src="{{url_for('static', filename='img/testimonial-2.jpg')}}" style="width: 45px; height: 45px;"> -->
-                                <div class="ps-3">
-                                    <h6 class="fw-bold mb-1" style="margin-left: 180px;" >Customer</h6>
-                                    <small style="margin-left: 197px;" >Firman</small>
+                                <div class="ps-3 customer-info">
+                                    <h6 class="fw-bold mb-1">Customer</h6>
+                                    <small>Firman</small>
                                 </div>
                             </div>
                         </div>
@@ -484,9 +415,9 @@
                             <p>Sangat puas karena bisa membangun rumah dengan denah yang saya custom sendiri. Bahkan, saya menambah tingkat di atasnya, prosesnya dibantu sampai selesai dan hasilnya memuaskan</p>
                             <div class="d-flex align-items-center">
                                 <!-- <img class="img-fluid flex-shrink-0 rounded" src="{{url_for('static', filename='img/testimonial-3.jpg')}}" style="width: 45px; height: 45px;"> -->
-                                <div class="ps-3">
-                                    <h6 class="fw-bold mb-1" style="margin-left: 180px;" >Customer</h6>
-                                    <small style="margin-left: 202px;" >Virna</small>
+                                <div class="ps-3 customer-info">
+                                    <h6 class="fw-bold mb-1">Customer</h6>
+                                    <small>Virna</small>
                                 </div>
                             </div>
                         </div>
@@ -541,7 +472,7 @@
                             &copy; <a class="border-bottom" href="#">Green Paddy Hills</a>, 2025.
                         </div>
                         <div class="col-md-6 text-center text-md-end mb-2 mb-md-0">
-                            <a href="{{url_for('login')}}" class="admin-icon">
+                            <a href="{{url_for('admin_redirect')}}" class="admin-icon">
                                 <i class="fas fa-user-shield"></i>
                             </a>
                         </div>

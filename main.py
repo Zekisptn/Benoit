@@ -1,4 +1,3 @@
-import smtplib
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from email.mime.text import MIMEText
@@ -26,11 +25,11 @@ app.config['MYSQL_DB'] = 'benoit'
 
 mysql = MySQL(app)
 
-EMAIL_PENGIRIM = os.getenv("EMAIL_PENGIRIM")
-EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
-EMAIL_PENERIMA = os.getenv("EMAIL_PENERIMA")
-SMTP_SERVER = os.getenv("SMTP_SERVER")
-SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
+# EMAIL_PENGIRIM = os.getenv("EMAIL_PENGIRIM")
+# EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+# EMAIL_PENERIMA = os.getenv("EMAIL_PENERIMA")
+# SMTP_SERVER = os.getenv("SMTP_SERVER")
+# SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
 
 # Custom filter to encode image data to base64
 @app.template_filter('b64encode')
@@ -230,7 +229,11 @@ def edit_property(id):
     
     if request.method == 'POST':
         nama_properti = request.form['nama_properti']
-        gambar_rumah = request.files['gambar_rumah'].read() if 'gambar_rumah' in request.files else property['gambar_rumah']
+        # Check if a new image is uploaded
+        if 'gambar_rumah' in request.files and request.files['gambar_rumah'].filename != '':
+            gambar_rumah = request.files['gambar_rumah'].read()
+        else:
+            gambar_rumah = property['gambar_rumah']  # Retain existing image
         luas_rumah = request.form['luas_rumah']
         kamar_mandi = request.form['kamar_mandi']
         kasur = request.form['kasur']
@@ -263,6 +266,13 @@ def form_logs():
     cursor.execute('SELECT * FROM formulir ORDER BY date DESC')
     form_entries = cursor.fetchall()
     return render_template('form_logs.html', form_entries=form_entries)
+
+@app.route('/admin-redirect')
+def admin_redirect():
+    if 'loggedin' in session:
+        return redirect(url_for('dashboard'))
+    else:
+        return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)

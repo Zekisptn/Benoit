@@ -71,9 +71,11 @@
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
                 <div class="col-md-6 p-5 mt-lg-5">
                     <h1 class="display-5 animated fadeIn mb-4">Contact Us</h1> 
+                        <nav aria-label="breadcrumb animated fadeIn">
+                    </nav>
                 </div>
                 <div class="col-md-6 animated fadeIn">
-                    <img class="img-fluid" src="{{ url_for('static', filename='img/Copy of Green Paddy Hills 3.png') }}" alt="">
+                    <img class="img-fluid" src="{{ url_for('static', filename='img/cover-contact.jpg') }}" alt="">
                 </div>
             </div>
         </div>
@@ -210,7 +212,7 @@
                             &copy; <a class="border-bottom" href="#">Green Paddy Hills</a>, 2025.
                         </div>
                         <div class="col-md-6 text-center text-md-end mb-2 mb-md-0">
-                            <a href="{{url_for('login')}}" class="admin-icon">
+                            <a href="{{url_for('admin_redirect')}}" class="admin-icon">
                                 <i class="fas fa-user-shield"></i>
                             </a>
                         </div>
