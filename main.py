@@ -1,18 +1,11 @@
-import os
-from flask import Flask, render_template, request, redirect, url_for, session, flash
-from email.mime.text import MIMEText
-from email.utils import formataddr
-from email.header import Header
-from dotenv import load_dotenv
-from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
 import base64
-import sqlite3
+
 import mysql.connector
+from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask_mysqldb import MySQL
 
-
-load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
@@ -25,11 +18,7 @@ app.config['MYSQL_DB'] = 'benoit'
 
 mysql = MySQL(app)
 
-# EMAIL_PENGIRIM = os.getenv("EMAIL_PENGIRIM")
-# EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
-# EMAIL_PENERIMA = os.getenv("EMAIL_PENERIMA")
-# SMTP_SERVER = os.getenv("SMTP_SERVER")
-# SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
+
 
 # Custom filter to encode image data to base64
 @app.template_filter('b64encode')
@@ -45,7 +34,12 @@ def home():
     # Fetch properties with status 'masih tersedia'
     cursor.execute('SELECT * FROM properti WHERE status_properti = %s', ('masih tersedia',))
     available_properties = cursor.fetchall()
-    return render_template('index.html', properties=available_properties)
+    
+    # Fetch reviews
+    cursor.execute('SELECT * FROM review')
+    reviews = cursor.fetchall()
+    
+    return render_template('index.html', properties=available_properties, reviews=reviews)
 
 @app.route('/about')
 def about():
@@ -189,12 +183,19 @@ def dashboard():
 def contact():
     return render_template('contact.html')
 
-@app.route('/properties')
+@app.route('/list-properties')
 def list_properties():
+    search_query = request.args.get('search', '')
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('SELECT * FROM properti')
+    
+    if search_query:
+        cursor.execute('SELECT * FROM properti WHERE nama_properti LIKE %s OR status_properti LIKE %s ORDER BY id_properti DESC', 
+                       ('%' + search_query + '%', '%' + search_query + '%'))
+    else:
+        cursor.execute('SELECT * FROM properti ORDER BY id_properti DESC')
+    
     properties = cursor.fetchall()
-    return render_template('properties.html', properties=properties)
+    return render_template('properties.html', properties=properties, search_query=search_query)
 
 @app.route('/add-property', methods=['GET', 'POST'])
 def add_property():
@@ -262,10 +263,17 @@ def logout():
 
 @app.route('/form-logs')
 def form_logs():
+    search_query = request.args.get('search', '')
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute('SELECT * FROM formulir ORDER BY date DESC')
+    
+    if search_query:
+        cursor.execute('SELECT * FROM formulir WHERE nama_pengirim LIKE %s OR isi_pesan LIKE %s ORDER BY date DESC', 
+                       ('%' + search_query + '%', '%' + search_query + '%'))
+    else:
+        cursor.execute('SELECT * FROM formulir ORDER BY date DESC')
+    
     form_entries = cursor.fetchall()
-    return render_template('form_logs.html', form_entries=form_entries)
+    return render_template('form_logs.html', form_entries=form_entries, search_query=search_query)
 
 @app.route('/admin-redirect')
 def admin_redirect():
@@ -273,6 +281,57 @@ def admin_redirect():
         return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('login'))
+
+@app.route('/mark-responded/<int:id>', methods=['POST'])
+def mark_responded(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('UPDATE formulir SET responded = TRUE WHERE id_pesan = %s', (id,))
+    mysql.connection.commit()
+    return redirect(url_for('form_logs'))
+
+@app.route('/add-review', methods=['GET', 'POST'])
+def add_review():
+    if request.method == 'POST':
+        nama_customer = request.form['nama_customer']
+        isi_review = request.form['isi_review']
+        
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('INSERT INTO review (nama_customer, isi_review) VALUES (%s, %s)', (nama_customer, isi_review))
+        mysql.connection.commit()
+        flash('Review berhasil ditambahkan!', 'success')
+        return redirect(url_for('list_reviews'))
+    return render_template('add_review.html')
+
+@app.route('/edit-review/<int:id>', methods=['GET', 'POST'])
+def edit_review(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM review WHERE id_customer = %s', (id,))
+    review = cursor.fetchone()
+    
+    if request.method == 'POST':
+        nama_customer = request.form['nama_customer']
+        isi_review = request.form['isi_review']
+        
+        cursor.execute('UPDATE review SET nama_customer = %s, isi_review = %s WHERE id_customer = %s', (nama_customer, isi_review, id))
+        mysql.connection.commit()
+        flash('Review berhasil diperbarui!', 'success')
+        return redirect(url_for('list_reviews'))
+    return render_template('edit_review.html', review=review)
+
+@app.route('/delete-review/<int:id>', methods=['POST'])
+def delete_review(id):
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('DELETE FROM review WHERE id_customer = %s', (id,))
+    mysql.connection.commit()
+    flash('Review berhasil dihapus!', 'success')
+    return redirect(url_for('list_reviews'))
+
+@app.route('/reviews')
+def list_reviews():
+    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+    cursor.execute('SELECT * FROM review')
+    reviews = cursor.fetchall()
+    return render_template('reviews.html', reviews=reviews)
 
 if __name__ == '__main__':
     app.run(debug=True)

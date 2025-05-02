@@ -86,6 +86,8 @@
     box-shadow: 0 0 30px rgba(0, 0, 0, .08);
 }
 
+
+
 .navbar .dropdown-toggle::after {
     border: none;
     content: "\f107";
@@ -479,4 +481,42 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+/* .bordered-text {
+    padding: 10px;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 0.9em;
+} */
+
+body {
+    background-color: #f8f9fa;
+}
+
+.sidebar {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    background-color: #343a40;
+    padding-top: 20px;
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    display: block;
+}
+
+.sidebar a:hover {
+    background-color: #575d63;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
 }

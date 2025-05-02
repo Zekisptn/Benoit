@@ -42,6 +42,7 @@
         <a href="#" onclick="confirmLogout()">Logout</a>
         <a href="{{ url_for('list_properties') }}">Manage Properties</a>
         <a href="{{ url_for('form_logs') }}">Form Logs</a>
+        <a href="{{ url_for('list_reviews') }}">Review Customer</a>
         <a href="{{url_for('home')}}">Halaman Utama</a>
     </div>
 
@@ -49,6 +50,10 @@
     <div class="content">
         <div class="container mt-5">
             <h2>Form Logs</h2>
+            <form method="GET" action="{{ url_for('form_logs') }}" class="mb-3">
+                <input type="text" name="search" class="form-control" placeholder="Search by name or message" value="{{ request.args.get('search', '') }}">
+                <button type="submit" class="btn btn-primary mt-2">Search</button>
+            </form>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -57,6 +62,7 @@
                         <th>Nomor Pengirim</th>
                         <th>Isi Pesan</th>
                         <th>Tanggal</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,6 +73,15 @@
                         <td>{{ entry.nomor_pengirim }}</td>
                         <td>{{ entry.isi_pesan }}</td>
                         <td>{{ entry.date }}</td>
+                        <td>
+                            {% if entry.responded %}
+                                <span class="badge bg-success">Sudah direspon</span>
+                            {% else %}
+                                <form action="{{ url_for('mark_responded', id=entry.id_pesan) }}" method="post">
+                                    <button type="submit" class="btn btn-primary btn-sm">Tandai Sudah direspon</button>
+                                </form>
+                            {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
